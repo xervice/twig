@@ -13,9 +13,8 @@
   },
   "require": {
     "php": ">=7.1.0",
-    "xervice/core": "dev-master",
-    "xervice/console": "dev-master",
-    "xervice/data-provider": "dev-master"
+    "xervice/console": "^1.0.0",
+    "twig/twig": "^2.4.8"
   },
   "autoload": {
     "psr-4": {
