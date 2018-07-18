@@ -6,17 +6,32 @@ namespace Xervice\Twig;
 
 use Xervice\Core\Dependency\DependencyProviderInterface;
 use Xervice\Core\Dependency\Provider\AbstractProvider;
+use Xervice\Twig\Business\Path\PathCollection;
 
 /**
  * @method \Xervice\Core\Locator\Locator getLocator()
  */
 class TwigDependencyProvider extends AbstractProvider
 {
+    public const PATH_PROVIDER_COLLECTION = 'path.provider.collection';
+
     /**
-     * @param \Xervice\Core\Dependency\DependencyProviderInterface $container
+     * @param \Xervice\Core\Dependency\DependencyProviderInterface $dependencyProvider
      */
-    public function handleDependencies(DependencyProviderInterface $container)
+    public function handleDependencies(DependencyProviderInterface $dependencyProvider): void
     {
-        // TODO: Implement handleDependencies() method.
+        $dependencyProvider[self::PATH_PROVIDER_COLLECTION] = function () {
+            return new PathCollection(
+                $this->getPathProviderList()
+            );
+        };
+    }
+
+    /**
+     * @return \Xervice\Twig\Business\Path\PathProviderInterface[]
+     */
+    protected function getPathProviderList(): array
+    {
+        return [];
     }
 }

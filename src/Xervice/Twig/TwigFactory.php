@@ -5,11 +5,87 @@ namespace Xervice\Twig;
 
 
 use Xervice\Core\Factory\AbstractFactory;
+use Xervice\Twig\Business\Loader\PathInjector;
+use Xervice\Twig\Business\Loader\PathInjectorInterface;
+use Xervice\Twig\Business\Loader\XerviceLoader;
+use Xervice\Twig\Business\Path\PathCollection;
 
 /**
  * @method \Xervice\Twig\TwigConfig getConfig()
  */
 class TwigFactory extends AbstractFactory
 {
-    // create here your internal classes
+    /**
+     * @var \Twig_Environment
+     */
+    private $twigEnvironment;
+
+    /**
+     * @return \Twig_Environment
+     */
+    public function createTwigEnvironment(): \Twig_Environment
+    {
+        return new \Twig_Environment(
+            $this->createXerviceLoader(),
+            [
+                'debug'               => $this->getConfig()->isDebug(),
+                'charset'             => $this->getConfig()->getCharset(),
+                'base_template_class' => $this->getConfig()->getBaseTemplateClass(),
+                'strict_variables'    => $this->getConfig()->isStrictVariables(),
+                'autoescape'          => $this->getConfig()->getAutoescape(),
+                'cache'               => $this->getConfig()->isCache() ? $this->getConfig()->getCachePath() : false,
+                'auto_reload'         => $this->getConfig()->isAutoReload(),
+                'optimizations'       => $this->getConfig()->getOptimization()
+            ]
+        );
+    }
+
+    /**
+     * @return \Xervice\Twig\Business\Loader\PathInjector
+     */
+    public function createPathInjector(): PathInjectorInterface
+    {
+        return new PathInjector(
+            $this->getTwigEnvironment()->getLoader()
+        );
+    }
+
+    /**
+     * @return \Twig_LoaderInterface
+     */
+    public function createXerviceLoader(): \Twig_LoaderInterface
+    {
+        return new XerviceLoader(
+            $this->createTwigFilesystemLoader(),
+            $this->getPathProviderCollection()
+        );
+    }
+
+    /**
+     * @return \Twig_Loader_Filesystem
+     */
+    public function createTwigFilesystemLoader(): \Twig_Loader_Filesystem
+    {
+        return new \Twig_Loader_Filesystem();
+    }
+
+    /***
+     * @return \Twig_Environment
+     */
+    public function getTwigEnvironment(): \Twig_Environment
+    {
+        if ($this->twigEnvironment === null) {
+            $this->twigEnvironment = $this->createTwigEnvironment();
+        }
+
+        return $this->twigEnvironment;
+    }
+
+    /**
+     * @return \Xervice\Twig\Business\Path\PathCollection
+     */
+    public function getPathProviderCollection(): PathCollection
+    {
+        return $this->getDependency(TwigDependencyProvider::PATH_PROVIDER_COLLECTION);
+    }
 }

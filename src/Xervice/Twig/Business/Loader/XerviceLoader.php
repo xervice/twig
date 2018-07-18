@@ -4,8 +4,49 @@
 namespace Xervice\Twig\Business\Loader;
 
 
-class XerviceLoader implements \Twig_LoaderInterface
+use Xervice\Twig\Business\Path\PathCollection;
+
+class XerviceLoader implements \Twig_LoaderInterface, XerviceLoaderInterface
 {
+    protected const XERVICE_NAMESPACE = '__main__';
+
+    /**
+     * @var \Twig_Loader_Filesystem
+     */
+    private $twigFilesystemLoader;
+
+    /**
+     * @var \Xervice\Twig\Business\Path\PathCollection
+     */
+    private $pathProviderCollection;
+
+    /**
+     * XerviceLoader constructor.
+     *
+     * @param \Twig_Loader_Filesystem $twigFilesystemLoader
+     * @param \Xervice\Twig\Business\Path\PathCollection $pathProviderCollection
+     */
+    public function __construct(
+        \Twig_Loader_Filesystem $twigFilesystemLoader,
+        PathCollection $pathProviderCollection
+    ) {
+        $this->twigFilesystemLoader = $twigFilesystemLoader;
+        $this->pathProviderCollection = $pathProviderCollection;
+
+        $this->providePaths();
+    }
+
+    /**
+     * @param string $path
+     * @param string $namespace
+     *
+     * @throws \Twig_Error_Loader
+     */
+    public function addPath(string $path, string $namespace = self::XERVICE_NAMESPACE)
+    {
+        $this->twigFilesystemLoader->addPath($path, $namespace);
+    }
+
     /**
      * @param string $name
      *
@@ -14,6 +55,7 @@ class XerviceLoader implements \Twig_LoaderInterface
      */
     public function getSourceContext($name)
     {
+        return $this->twigFilesystemLoader->getSourceContext($name);
     }
 
     /**
@@ -24,6 +66,7 @@ class XerviceLoader implements \Twig_LoaderInterface
      */
     public function getCacheKey($name)
     {
+        return $this->twigFilesystemLoader->getCacheKey($name);
     }
 
     /**
@@ -35,6 +78,7 @@ class XerviceLoader implements \Twig_LoaderInterface
      */
     public function isFresh($name, $time)
     {
+        return $this->twigFilesystemLoader->isFresh($name, $time);
     }
 
     /**
@@ -44,10 +88,13 @@ class XerviceLoader implements \Twig_LoaderInterface
      */
     public function exists($name)
     {
+        return $this->twigFilesystemLoader->exists($name);
     }
 
-    private function findTemplate(string $template)
+    protected function providePaths(): void
     {
-
+        foreach ($this->pathProviderCollection as $pathProvider) {
+            $pathProvider->privideTwigPaths($this);
+        }
     }
 }
