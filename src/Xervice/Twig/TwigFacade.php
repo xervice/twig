@@ -9,7 +9,6 @@ use Xervice\Core\Facade\AbstractFacade;
 /**
  * @method \Xervice\Twig\TwigFactory getFactory()
  * @method \Xervice\Twig\TwigConfig getConfig()
- * @method \Xervice\Twig\TwigClient getClient()
  */
 class TwigFacade extends AbstractFacade
 {
@@ -22,7 +21,7 @@ class TwigFacade extends AbstractFacade
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function render(string $template, array $params = [])
+    public function render(string $template, array $params = []): string
     {
         return $this->getFactory()->getTwigEnvironment()->render($template, $params);
     }

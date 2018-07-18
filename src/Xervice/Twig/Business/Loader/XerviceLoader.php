@@ -42,7 +42,7 @@ class XerviceLoader implements \Twig_LoaderInterface, XerviceLoaderInterface
      *
      * @throws \Twig_Error_Loader
      */
-    public function addPath(string $path, string $namespace = self::XERVICE_NAMESPACE)
+    public function addPath(string $path, string $namespace = self::XERVICE_NAMESPACE): void
     {
         $this->twigFilesystemLoader->addPath($path, $namespace);
     }
@@ -53,7 +53,7 @@ class XerviceLoader implements \Twig_LoaderInterface, XerviceLoaderInterface
      * @return \Twig_Source
      * @throws \Twig_Error_Loader
      */
-    public function getSourceContext($name)
+    public function getSourceContext($name): \Twig_Source
     {
         return $this->twigFilesystemLoader->getSourceContext($name);
     }
@@ -64,7 +64,7 @@ class XerviceLoader implements \Twig_LoaderInterface, XerviceLoaderInterface
      * @return string
      * @throws \Twig_Error_Loader
      */
-    public function getCacheKey($name)
+    public function getCacheKey($name): string
     {
         return $this->twigFilesystemLoader->getCacheKey($name);
     }
@@ -76,7 +76,7 @@ class XerviceLoader implements \Twig_LoaderInterface, XerviceLoaderInterface
      * @return bool
      * @throws \Twig_Error_Loader
      */
-    public function isFresh($name, $time)
+    public function isFresh($name, $time): bool
     {
         return $this->twigFilesystemLoader->isFresh($name, $time);
     }
@@ -86,7 +86,7 @@ class XerviceLoader implements \Twig_LoaderInterface, XerviceLoaderInterface
      *
      * @return bool
      */
-    public function exists($name)
+    public function exists($name): bool
     {
         return $this->twigFilesystemLoader->exists($name);
     }

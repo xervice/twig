@@ -10,5 +10,5 @@ interface XerviceLoaderInterface
      *
      * @throws \Twig_Error_Loader
      */
-    public function addPath(string $path, string $namespace = self::XERVICE_NAMESPACE);
+    public function addPath(string $path, string $namespace);
 }
