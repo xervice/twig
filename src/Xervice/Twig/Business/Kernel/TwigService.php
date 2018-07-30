@@ -24,6 +24,6 @@ class TwigService extends AbstractWithLocator implements ClearServiceInterface
      */
     public function render(string $template, array $params = []): string
     {
-        $this->getFacade()->render($template, $params);
+        return $this->getFacade()->render($template, $params);
     }
 }
