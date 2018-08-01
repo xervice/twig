@@ -10,6 +10,9 @@ use Xervice\Twig\Business\Loader\PathInjector;
 use Xervice\Twig\Business\Loader\PathInjectorInterface;
 use Xervice\Twig\Business\Loader\XerviceLoader;
 use Xervice\Twig\Business\Path\PathCollection;
+use Xervice\Twig\Business\Twig\Extensions\TwigExtensionCollection;
+use Xervice\Twig\Business\Twig\TwigEnvironmentProvider;
+use Xervice\Twig\Business\Twig\TwigEnvironmentProviderInterface;
 
 /**
  * @method \Xervice\Twig\TwigConfig getConfig()
@@ -20,6 +23,17 @@ class TwigFactory extends AbstractFactory
      * @var \Twig_Environment
      */
     private $twigEnvironment;
+
+    /**
+     * @return \Xervice\Twig\Business\Twig\TwigEnvironmentProviderInterface
+     */
+    public function createTwigEnvironmentProvider(): TwigEnvironmentProviderInterface
+    {
+        return new TwigEnvironmentProvider(
+            $this->createTwigEnvironment(),
+            $this->getTwigExtensionCollection()
+        );
+    }
 
     /**
      * @return \Twig_Environment
@@ -76,7 +90,7 @@ class TwigFactory extends AbstractFactory
     public function getTwigEnvironment(): \Twig_Environment
     {
         if ($this->twigEnvironment === null) {
-            $this->twigEnvironment = $this->createTwigEnvironment();
+            $this->twigEnvironment = $this->createTwigEnvironmentProvider()->getTwigEnvironment();
         }
 
         return $this->twigEnvironment;
@@ -88,5 +102,13 @@ class TwigFactory extends AbstractFactory
     public function getPathProviderCollection(): PathCollection
     {
         return $this->getDependency(TwigDependencyProvider::PATH_PROVIDER_COLLECTION);
+    }
+
+    /**
+     * @return \Xervice\Twig\Business\Twig\Extensions\TwigExtensionCollection
+     */
+    public function getTwigExtensionCollection(): TwigExtensionCollection
+    {
+        return $this->getDependency(TwigDependencyProvider::TWIG_EXTENSIONS);
     }
 }
