@@ -48,6 +48,10 @@ class TwigConfig extends AbstractConfig
                     '%s/src/%s',
                     $this->get(XerviceConfig::APPLICATION_PATH),
                     'Xervice'
+                ),
+                sprintf(
+                    '%s/vendor/xervice/*/src/Xervice',
+                    $this->get(XerviceConfig::APPLICATION_PATH)
                 )
             ]
         );
