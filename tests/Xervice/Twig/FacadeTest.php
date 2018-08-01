@@ -17,15 +17,16 @@ class FacadeTest extends \Codeception\Test\Unit
      * @group Facade
      * @group Integration
      * @throws \Core\Locator\Dynamic\ServiceNotParseable
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
      */
     public function testRenderTemplate()
     {
-        $this->getFacade()->addTemplatePath(__DIR__ . '/Template');
-
         $this->assertEquals(
             'This is a Test: Testing',
             $this->getFacade()->render(
-                'test.twig',
+                '@Twig/test.twig',
                 [
                     'paramTest' => 'Testing'
                 ]

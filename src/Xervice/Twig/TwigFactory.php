@@ -10,6 +10,8 @@ use Xervice\Twig\Business\Loader\PathInjector;
 use Xervice\Twig\Business\Loader\PathInjectorInterface;
 use Xervice\Twig\Business\Loader\XerviceLoader;
 use Xervice\Twig\Business\Path\PathCollection;
+use Xervice\Twig\Business\Path\XervicePathFinder;
+use Xervice\Twig\Business\Path\XervicePathFinderInterface;
 use Xervice\Twig\Business\Twig\Extensions\TwigExtensionCollection;
 use Xervice\Twig\Business\Twig\TwigEnvironmentProvider;
 use Xervice\Twig\Business\Twig\TwigEnvironmentProviderInterface;
@@ -52,6 +54,16 @@ class TwigFactory extends AbstractFactory
                 'auto_reload'         => $this->getConfig()->isAutoReload(),
                 'optimizations'       => $this->getConfig()->getOptimization()
             ]
+        );
+    }
+
+    /**
+     * @return \Xervice\Twig\Business\Path\XervicePathFinderInterface
+     */
+    public function createPathFinder(): XervicePathFinderInterface
+    {
+        return new XervicePathFinder(
+            $this->getConfig()->getModulePaths()
         );
     }
 
@@ -110,5 +122,10 @@ class TwigFactory extends AbstractFactory
     public function getTwigExtensionCollection(): TwigExtensionCollection
     {
         return $this->getDependency(TwigDependencyProvider::TWIG_EXTENSIONS);
+    }
+
+    public function getPathFinder()
+    {
+        
     }
 }

@@ -34,6 +34,7 @@ class XerviceLoader implements \Twig_LoaderInterface, XerviceLoaderInterface
         $this->twigFilesystemLoader = $twigFilesystemLoader;
         $this->pathProviderCollection = $pathProviderCollection;
 
+        $this->addPath('/', '__main__');
         $this->providePaths();
     }
 
@@ -95,7 +96,7 @@ class XerviceLoader implements \Twig_LoaderInterface, XerviceLoaderInterface
     protected function providePaths(): void
     {
         foreach ($this->pathProviderCollection as $pathProvider) {
-            $pathProvider->privideTwigPaths($this);
+            $pathProvider->provideTwigPaths($this);
         }
     }
 }

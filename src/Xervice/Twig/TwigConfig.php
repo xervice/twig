@@ -5,27 +5,53 @@ declare(strict_types=1);
 namespace Xervice\Twig;
 
 
+use Xervice\Config\XerviceConfig;
 use Xervice\Core\Config\AbstractConfig;
+use Xervice\Core\CoreConfig;
 
 class TwigConfig extends AbstractConfig
 {
-    public const DEBUG = 'debug';
+    public const DEBUG = 'twig.debug';
 
-    public const CHARSET = 'charset';
+    public const CHARSET = 'twig.charset';
 
-    public const BASE_TEMPLATE_CLASS = 'base.template.class';
+    public const BASE_TEMPLATE_CLASS = 'twig.base.template.class';
 
-    public const STRICT_VARIABLES = 'strict.variables';
+    public const STRICT_VARIABLES = 'twig.strict.variables';
 
-    public const AUTOESCAPE = 'autoescape';
+    public const AUTOESCAPE = 'twig.autoescape';
 
-    public const CACHE = 'cache';
+    public const CACHE = 'twig.cache';
 
-    public const CACHE_PATH = 'cache.path';
+    public const CACHE_PATH = 'twig.cache.path';
 
-    public const AUTO_RELOAD = 'auto.reload';
+    public const AUTO_RELOAD = 'twig.auto.reload';
 
-    public const OPTIMIZATIONS = 'optimizations';
+    public const OPTIMIZATIONS = 'twig.optimizations';
+
+    public const MODULE_PATHS = 'twig.module.paths';
+
+    /**
+     * @return array
+     */
+    public function getModulePaths(): array
+    {
+        return $this->get(
+            self::MODULE_PATHS,
+            [
+                sprintf(
+                    '%s/src/%s',
+                    $this->get(XerviceConfig::APPLICATION_PATH),
+                    $this->get(CoreConfig::PROJECT_LAYER_NAMESPACE)
+                ),
+                sprintf(
+                    '%s/src/%s',
+                    $this->get(XerviceConfig::APPLICATION_PATH),
+                    'Xervice'
+                )
+            ]
+        );
+    }
 
     /**
      * @return bool

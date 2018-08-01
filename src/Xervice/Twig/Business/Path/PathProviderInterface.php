@@ -12,5 +12,5 @@ interface PathProviderInterface
     /**
      * @param \Xervice\Twig\Business\Loader\XerviceLoaderInterface $loader
      */
-    public function privideTwigPaths(XerviceLoaderInterface $loader): void;
+    public function provideTwigPaths(XerviceLoaderInterface $loader): void;
 }

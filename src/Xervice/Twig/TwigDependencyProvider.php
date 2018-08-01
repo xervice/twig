@@ -8,6 +8,7 @@ namespace Xervice\Twig;
 use Xervice\Core\Dependency\DependencyProviderInterface;
 use Xervice\Core\Dependency\Provider\AbstractProvider;
 use Xervice\Twig\Business\Path\PathCollection;
+use Xervice\Twig\Business\Path\XervicePathProvider;
 use Xervice\Twig\Business\Twig\Extensions\TwigExtensionCollection;
 
 /**
@@ -42,7 +43,9 @@ class TwigDependencyProvider extends AbstractProvider
      */
     protected function getPathProviderList(): array
     {
-        return [];
+        return [
+            new XervicePathProvider()
+        ];
     }
 
     /**
