@@ -28,11 +28,7 @@ class XervicePathFinder extends Finder implements XervicePathFinderInterface
      */
     public function getPaths()
     {
-        $paths = [];
-
-        return $this->in($this->paths)->directories();
-
-        return $this;
+        return $this->in($this->paths)->directories()->depth(0);
     }
 
 }
