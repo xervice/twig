@@ -1,22 +1,21 @@
 <?php
 
 
-namespace Xervice\Twig\Business\Path;
+namespace Xervice\Twig\Business\Model\Path;
 
 
-use Symfony\Component\Finder\Finder;
-use Xervice\Core\Locator\AbstractWithLocator;
-use Xervice\Twig\Business\Loader\XerviceLoaderInterface;
+use Xervice\Core\Plugin\AbstractBusinessPlugin;
+use Xervice\Twig\Business\Dependency\Path\PathProviderInterface;
+use Xervice\Twig\Business\Model\Loader\XerviceLoaderInterface;
 
 /**
- * @method \Xervice\Twig\TwigFactory getFactory()
+ * @method \Xervice\Twig\Business\TwigBusinessFactory getFactory()
  */
-class XervicePathProvider extends AbstractWithLocator implements PathProviderInterface
+class XervicePathProvider extends AbstractBusinessPlugin implements PathProviderInterface
 {
     /**
-     * @param \Xervice\Twig\Business\Loader\XerviceLoaderInterface $loader
+     * @param \Xervice\Twig\Business\Model\Loader\XerviceLoaderInterface $loader
      *
-     * @throws \Core\Locator\Dynamic\ServiceNotParseable
      * @throws \Twig_Error_Loader
      */
     public function provideTwigPaths(XerviceLoaderInterface $loader): void

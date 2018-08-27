@@ -1,6 +1,6 @@
 <?php
 
-namespace Xervice\Twig\Business\Path;
+namespace Xervice\Twig\Business\Model\Path;
 
 interface XervicePathFinderInterface
 {

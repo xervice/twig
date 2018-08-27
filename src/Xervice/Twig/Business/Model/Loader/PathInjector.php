@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 
-namespace Xervice\Twig\Business\Loader;
+namespace Xervice\Twig\Business\Model\Loader;
 
 
 class PathInjector implements PathInjectorInterface

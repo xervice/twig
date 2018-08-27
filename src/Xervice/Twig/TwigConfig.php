@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Xervice\Twig;
 
 
-use Xervice\Config\XerviceConfig;
-use Xervice\Core\Config\AbstractConfig;
+use Xervice\Config\Business\XerviceConfig;
+use Xervice\Core\Business\Model\Config\AbstractConfig;
 use Xervice\Core\CoreConfig;
 
 class TwigConfig extends AbstractConfig
@@ -40,9 +40,8 @@ class TwigConfig extends AbstractConfig
             self::MODULE_PATHS,
             [
                 sprintf(
-                    '%s/src/%s',
-                    $this->get(XerviceConfig::APPLICATION_PATH),
-                    $this->get(CoreConfig::PROJECT_LAYER_NAMESPACE)
+                    '%s/src/*',
+                    $this->get(XerviceConfig::APPLICATION_PATH)
                 ),
                 sprintf(
                     '%s/src/%s',

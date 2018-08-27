@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Xervice\Twig\Business\Path;
+namespace Xervice\Twig\Business\Model\Path;
 
 
 class XervicePathFinder implements XervicePathFinderInterface

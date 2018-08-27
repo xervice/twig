@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Xervice\Twig\Business\Twig\Extensions;
+namespace Xervice\Twig\Business\Dependency\Twig\Extensions;
 
 
 interface TwigExtensionInterface

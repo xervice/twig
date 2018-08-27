@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Xervice\Twig\Business\Twig;
+namespace Xervice\Twig\Business\Model\Twig;
 
 
-use Xervice\Twig\Business\Twig\Extensions\TwigExtensionCollection;
+use Xervice\Twig\Business\Model\Twig\Extensions\TwigExtensionCollection;
 
 class TwigEnvironmentProvider implements TwigEnvironmentProviderInterface
 {
@@ -14,16 +14,15 @@ class TwigEnvironmentProvider implements TwigEnvironmentProviderInterface
     private $twig;
 
     /**
-     * @var \Xervice\Twig\Business\Twig\Extensions\TwigExtensionCollection
+     * @var \Xervice\Twig\Business\Model\Twig\Extensions\TwigExtensionCollection
      */
     private $extensions;
 
     /**
      * TwigEnvironmentProvider constructor.
      *
-     * @param \Twig_LoaderInterface $loader
-     * @param \Xervice\Twig\Business\Twig\Extensions\TwigExtensionCollection $extensions
-     * @param array $config
+     * @param \Twig_Environment $environment
+     * @param \Xervice\Twig\Business\Model\Twig\Extensions\TwigExtensionCollection $extensions
      */
     public function __construct(
         \Twig_Environment $environment,

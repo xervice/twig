@@ -1,6 +1,6 @@
 <?php
 
-namespace Xervice\Twig\Business\Twig;
+namespace Xervice\Twig\Business\Model\Twig;
 
 interface TwigEnvironmentProviderInterface
 {

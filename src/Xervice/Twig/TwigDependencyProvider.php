@@ -5,41 +5,41 @@ declare(strict_types=1);
 namespace Xervice\Twig;
 
 
-use Xervice\Core\Dependency\DependencyProviderInterface;
-use Xervice\Core\Dependency\Provider\AbstractProvider;
-use Xervice\Twig\Business\Path\PathCollection;
-use Xervice\Twig\Business\Path\XervicePathProvider;
-use Xervice\Twig\Business\Twig\Extensions\TwigExtensionCollection;
+use Xervice\Core\Business\Model\Dependency\DependencyContainerInterface;
+use Xervice\Core\Business\Model\Dependency\Provider\AbstractDependencyProvider;
+use Xervice\Twig\Business\Model\Path\PathCollection;
+use Xervice\Twig\Business\Model\Path\XervicePathProvider;
+use Xervice\Twig\Business\Model\Twig\Extensions\TwigExtensionCollection;
 
-/**
- * @method \Xervice\Core\Locator\Locator getLocator()
- */
-class TwigDependencyProvider extends AbstractProvider
+class TwigDependencyProvider extends AbstractDependencyProvider
 {
     public const PATH_PROVIDER_COLLECTION = 'path.provider.collection';
-
     public const TWIG_EXTENSIONS = 'twig.extensions';
 
     /**
-     * @param \Xervice\Core\Dependency\DependencyProviderInterface $dependencyProvider
+     * @param \Xervice\Core\Business\Model\Dependency\DependencyContainerInterface $container
+     *
+     * @return \Xervice\Core\Business\Model\Dependency\DependencyContainerInterface
      */
-    public function handleDependencies(DependencyProviderInterface $dependencyProvider): void
+    public function handleDependencies(DependencyContainerInterface $container): DependencyContainerInterface
     {
-        $dependencyProvider[self::PATH_PROVIDER_COLLECTION] = function () {
+        $container[self::PATH_PROVIDER_COLLECTION] = function () {
             return new PathCollection(
                 $this->getPathProviderList()
             );
         };
 
-        $dependencyProvider[self::TWIG_EXTENSIONS] = function () {
+        $container[self::TWIG_EXTENSIONS] = function () {
             return new TwigExtensionCollection(
                 $this->getTwigExtensions()
             );
         };
+
+        return $container;
     }
 
     /**
-     * @return \Xervice\Twig\Business\Path\PathProviderInterface[]
+     * @return \Xervice\Twig\Business\Dependency\Path\PathProviderInterface[]
      */
     protected function getPathProviderList(): array
     {
@@ -49,7 +49,7 @@ class TwigDependencyProvider extends AbstractProvider
     }
 
     /**
-     * @return \Xervice\Twig\Business\Twig\Extensions\TwigExtensionInterface[]
+     * @return \Xervice\Twig\Business\Dependency\Twig\Extensions\TwigExtensionInterface[]
      */
     protected function getTwigExtensions(): array
     {

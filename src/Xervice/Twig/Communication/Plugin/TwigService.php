@@ -1,23 +1,21 @@
 <?php
+declare(strict_types=1);
 
+namespace Xervice\Twig\Communication\Plugin;
+use Xervice\Core\Plugin\AbstractCommunicationPlugin;
+use Xervice\Kernel\Business\Plugin\ClearServiceInterface;
 
-namespace Xervice\Twig\Business\Kernel;
-
-
-use Xervice\Core\Locator\AbstractWithLocator;
-use Xervice\Kernel\Business\Service\ClearServiceInterface;
 
 /**
- * @method \Xervice\Twig\TwigFacade getFacade()
+ * @method \Xervice\Twig\Business\TwigFacade getFacade()
  */
-class TwigService extends AbstractWithLocator implements ClearServiceInterface
+class TwigService extends AbstractCommunicationPlugin implements ClearServiceInterface
 {
     /**
      * @param string $template
      * @param array $params
      *
      * @return string
-     * @throws \Core\Locator\Dynamic\ServiceNotParseable
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax

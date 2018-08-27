@@ -2,13 +2,11 @@
 declare(strict_types=1);
 
 
-namespace Xervice\Twig;
-
-
-use Xervice\Core\Facade\AbstractFacade;
+namespace Xervice\Twig\Business;
+use Xervice\Core\Business\Model\Facade\AbstractFacade;
 
 /**
- * @method \Xervice\Twig\TwigFactory getFactory()
+ * @method \Xervice\Twig\Business\TwigBusinessFactory getFactory()
  * @method \Xervice\Twig\TwigConfig getConfig()
  */
 class TwigFacade extends AbstractFacade

@@ -1,14 +1,15 @@
 <?php
-declare(strict_types=1);
 
 
-namespace Xervice\Twig\Business\Path;
+namespace Xervice\Twig\Business\Model\Twig\Extensions;
 
 
-class PathCollection implements \Iterator, \Countable
+use Xervice\Twig\Business\Dependency\Twig\Extensions\TwigExtensionInterface;
+
+class TwigExtensionCollection implements \Iterator, \Countable
 {
     /**
-     * @var \Xervice\Twig\Business\Path\PathProviderInterface[]
+     * @var \Xervice\Twig\Business\Dependency\Twig\Extensions\TwigExtensionInterface[]
      */
     private $collection;
 
@@ -20,7 +21,7 @@ class PathCollection implements \Iterator, \Countable
     /**
      * Collection constructor.
      *
-     * @param \Xervice\Twig\Business\Path\PathProviderInterface[] $collection
+     * @param \Xervice\Twig\Business\Dependency\Twig\Extensions\TwigExtensionInterface[] $collection
      */
     public function __construct(array $collection)
     {
@@ -30,17 +31,17 @@ class PathCollection implements \Iterator, \Countable
     }
 
     /**
-     * @param \Xervice\Twig\Business\Path\PathProviderInterface $validator
+     * @param \Xervice\Twig\Business\Dependency\Twig\Extensions\TwigExtensionInterface $validator
      */
-    public function add(PathProviderInterface $validator): void
+    public function add(TwigExtensionInterface $validator): void
     {
         $this->collection[] = $validator;
     }
 
     /**
-     * @return \Xervice\Twig\Business\Path\PathProviderInterface
+     * @return \Xervice\Twig\Business\Dependency\Twig\Extensions\TwigExtensionInterface
      */
-    public function current(): PathProviderInterface
+    public function current(): TwigExtensionInterface
     {
         return $this->collection[$this->position];
     }

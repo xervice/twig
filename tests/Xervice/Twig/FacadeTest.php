@@ -1,22 +1,20 @@
 <?php
 namespace XerviceTest\Twig;
 
-use Xervice\Core\Facade\FacadeInterface;
-use Xervice\Core\Locator\Dynamic\DynamicLocator;
+use Xervice\Core\Business\Model\Locator\Dynamic\Business\DynamicBusinessLocator;
 
 /**
- * @method \Xervice\Twig\TwigFacade getFacade()
+ * @method \Xervice\Twig\Business\TwigFacade getFacade()
  */
 class FacadeTest extends \Codeception\Test\Unit
 {
-    use DynamicLocator;
+    use DynamicBusinessLocator;
 
     /**
      * @group Xervice
      * @group Twig
      * @group Facade
      * @group Integration
-     * @throws \Core\Locator\Dynamic\ServiceNotParseable
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax

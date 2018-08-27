@@ -20,10 +20,10 @@ To define twig paths, where to search for templates, you can share a PathProvide
 ```php
 <?php
 
-namespace App\Application\Plugins\Twig;
+namespace App\Application\Communication\Plugin\Twig;
 
-use Xervice\Twig\Business\Loader\XerviceLoaderInterface;
-use Xervice\Twig\Business\Path\PathProviderInterface;
+use Xervice\Twig\Business\Model\Loader\XerviceLoaderInterface;
+use Xervice\Twig\Business\Dependency\Path\PathProviderInterface;
 
 class PathLoader implements PathProviderInterface
 {
@@ -46,13 +46,13 @@ You can register your PathLoader in the TwigDependencyProvider:
 
 namespace App\Twig;
 
-use App\Application\Plugins\Twig\PathLoader;
+use App\Application\Communication\Plugin\Twig\PathLoader;
 use Xervice\Twig\TwigDependencyProvider as XerviceTwigDependencyProvider;
 
 class TwigDependencyProvider extends XerviceTwigDependencyProvider
 {
     /**
-     * @return \Xervice\Twig\Business\Path\PathProviderInterface[]
+     * @return \Xervice\Twig\Business\Dependency\Path\PathProviderInterface[]
      */
     protected function getPathProviderList(): array
     {

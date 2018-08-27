@@ -2,10 +2,10 @@
 declare(strict_types=1);
 
 
-namespace Xervice\Twig\Business\Loader;
+namespace Xervice\Twig\Business\Model\Loader;
 
 
-use Xervice\Twig\Business\Path\PathCollection;
+use Xervice\Twig\Business\Model\Path\PathCollection;
 
 class XerviceLoader implements \Twig_LoaderInterface, XerviceLoaderInterface
 {
@@ -17,7 +17,7 @@ class XerviceLoader implements \Twig_LoaderInterface, XerviceLoaderInterface
     private $twigFilesystemLoader;
 
     /**
-     * @var \Xervice\Twig\Business\Path\PathCollection
+     * @var \Xervice\Twig\Business\Model\Path\PathCollection
      */
     private $pathProviderCollection;
 
@@ -25,7 +25,7 @@ class XerviceLoader implements \Twig_LoaderInterface, XerviceLoaderInterface
      * XerviceLoader constructor.
      *
      * @param \Twig_Loader_Filesystem $twigFilesystemLoader
-     * @param \Xervice\Twig\Business\Path\PathCollection $pathProviderCollection
+     * @param \Xervice\Twig\Business\Model\Path\PathCollection $pathProviderCollection
      */
     public function __construct(
         \Twig_Loader_Filesystem $twigFilesystemLoader,
