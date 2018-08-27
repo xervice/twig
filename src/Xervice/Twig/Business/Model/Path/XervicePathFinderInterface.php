@@ -5,7 +5,7 @@ namespace Xervice\Twig\Business\Model\Path;
 interface XervicePathFinderInterface
 {
     /**
-     * @return array
+     * @return \Xervice\Twig\Business\Model\Path\XervicePathFinderInterface
      */
-    public function getPaths(): array;
+    public function getPaths();
 }

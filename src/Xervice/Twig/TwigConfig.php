@@ -40,16 +40,11 @@ class TwigConfig extends AbstractConfig
             self::MODULE_PATHS,
             [
                 sprintf(
-                    '%s/src/*',
+                    '%s/src/*/*',
                     $this->get(XerviceConfig::APPLICATION_PATH)
                 ),
                 sprintf(
-                    '%s/src/%s',
-                    $this->get(XerviceConfig::APPLICATION_PATH),
-                    'Xervice'
-                ),
-                sprintf(
-                    '%s/vendor/xervice/*/src/Xervice',
+                    '%s/vendor/xervice/*/src/Xervice/*',
                     $this->get(XerviceConfig::APPLICATION_PATH)
                 )
             ]

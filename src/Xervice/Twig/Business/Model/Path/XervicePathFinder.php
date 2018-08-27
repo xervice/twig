@@ -4,7 +4,9 @@
 namespace Xervice\Twig\Business\Model\Path;
 
 
-class XervicePathFinder implements XervicePathFinderInterface
+use Symfony\Component\Finder\Finder;
+
+class XervicePathFinder extends Finder implements XervicePathFinderInterface
 {
     /**
      * @var array
@@ -22,21 +24,15 @@ class XervicePathFinder implements XervicePathFinderInterface
     }
 
     /**
-     * @return array
+     * @return $this
      */
-    public function getPaths(): array
+    public function getPaths()
     {
         $paths = [];
-        foreach ($this->paths as $path) {
-            if (is_dir($path)) {
-                $paths = array_merge(
-                    $paths,
-                    glob($path . '/*')
-                );
-            }
-        }
 
-        return $paths;
+        return $this->in($this->paths)->directories();
+
+        return $this;
     }
 
 }

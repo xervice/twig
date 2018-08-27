@@ -11,6 +11,6 @@ $config[DataProviderConfig::DATA_PROVIDER_PATHS] = [
 
 if (class_exists(TwigConfig::class)) {
     $config[TwigConfig::MODULE_PATHS] = [
-        dirname(__DIR__) . '/tests/Xervice'
+        dirname(__DIR__) . '/tests/*'
     ];
 }
